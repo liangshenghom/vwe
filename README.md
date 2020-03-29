@@ -3,7 +3,7 @@ vue webapck  express 全站项目
 npm i i --save-dev (-D)
 --save-dev -D一样的效果
 
-本地仓库与github 远程仓库 合并的出现问题的解决办法：
+# 本地仓库与github 远程仓库 合并的出现问题的解决办法：
 
 1.本地安装vue  vue-cli
 vue init webpack app
@@ -27,7 +27,7 @@ git push 推送到远程GitHub仓库master 分支 成功
 
 
 
-#引入scss错误原因是因为 引入的sass-loader 版本太高
+# 引入scss错误原因是因为 引入的sass-loader 版本太高
 npm install node-sass --save-dev 		//安装node-sass 
 npm install sass-loader --save-dev 		//安装sass-loader 
 npm install style-loader --save-dev 		//安装style-loader
