@@ -1,7 +1,12 @@
 const express=require("express");
 const app=express();
+const bodyParser = require('body-parser');
+ 
+
 
 const userRouter=require("./api/user");
+
+const fankuiRouter=require("./api/fankui");
 
 // 跨域支持
 app.all('*', (req, res, next) => {
@@ -14,7 +19,11 @@ app.all('*', (req, res, next) => {
     next();
   });
 
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: false }));
+  
   app.use("/user",userRouter);
+  app.use("/fankui",fankuiRouter);
 
   app.listen("3000");
 

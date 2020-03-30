@@ -233,12 +233,13 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
-            <form>
+          <form >
+            <div class="modal-body">
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">联系方式:</label>
                 <input
                   type="text"
+                  name="contact"
                   placeholder="邮箱/手机号码/其他"
                   class="form-control"
                   id="recipient-name"
@@ -246,14 +247,14 @@
               </div>
               <div class="form-group">
                 <label for="message-text" class="col-form-label">问题描述:</label>
-                <textarea class="form-control" id="message-text">请输入</textarea>
+                <textarea class="form-control" id="message-text" name="content" placeholder="请输入"></textarea>
               </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-primary">提交</button>
-          </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+              <button type="button" class="btn btn-primary" @click="onSubmit($event)">提交</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -266,7 +267,11 @@ export default {
   name: "index",
   data() {
     return {
-      articles: []
+      articles: [],
+      formMsg:{
+        contact:"",
+        content:""
+      }
     };
   },
   created() {
@@ -280,6 +285,32 @@ export default {
       .catch(function(err) {
         console.log(err);
       });
+  },
+  methods: {
+    onSubmit: function(event) {
+     
+
+      let formData = new FormData();
+      for(var key in this.formMsg){
+        formData.append(key,this.formMsg[key]);
+      }
+  console.log(formData)
+      axios({
+	    method:"post",
+	    url:"http://localhost:3000/fankui/",
+	    headers: {
+		  "Content-Type": "multipart/form-data"
+	    },
+	    withCredentials:true,
+	    data:formData
+	    }).then((res)=>{
+            console.log(res);
+      });
+
+
+     
+
+    }
   }
 };
 </script>

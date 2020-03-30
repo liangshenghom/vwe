@@ -34,11 +34,11 @@ npm install style-loader --save-dev 		//安装style-loader
 sass-loader改为：
 npm install sass-loader@7.3.1 --save-dev
 
-#mysql server 出现vsrunrime.dll缺失的情况 用微软常用库 集合 修复
-#mysqld -remove mysql  卸载mysql服务
+# mysql server 出现vsrunrime.dll缺失的情况 用微软常用库 集合 修复
+# mysqld -remove mysql  卸载mysql服务
 
 
-#vue数组赋值
+# vue数组赋值
 在请求执行成功后执行回调函数中的内容，回调函数处于其它函数的内部this不会与任何对象绑定，为undefined。
 
 解决方案：
