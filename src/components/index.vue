@@ -3,7 +3,7 @@
     <div class="top bg-dark">
       <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <a class="navbar-brand" href="#">Navbar</a>
+          <a class="navbar-brand" href="#">首页</a>
           <button
             class="navbar-toggler"
             type="button"
@@ -18,44 +18,27 @@
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="#">
-                  Home
-                  <span class="sr-only">(current)</span>
-                </a>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="#">导航一</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >Dropdown</a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
+                <a class="nav-link text-white" href="#">导航二</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                <a class="nav-link text-white" href="#">导航三</a>
               </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
               <input
-                class="form-control mr-sm-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
+              class="form-control mr-sm-2"
+              type="text"
+              placeholder="输入搜索内容""
+              aria-label="Search"
               />
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              <button
+                class="btn btn-outline-success my-2 my-sm-0"
+                type="submit"
+              >搜索</button>
             </form>
           </div>
         </nav>
@@ -64,13 +47,11 @@
 
     <div class="container">
       <div class="container jumbotron mt-1">
-        <h1 class="display-4">Hello, world!</h1>
-        <p
-          class="lead"
-        >This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+        <h1 class="display-4">巨幕标题一</h1>
+        <p class="lead">巨幕子标题</p>
         <hr class="my-4" />
-        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+        <p>巨幕内容描述</p>
+        <a class="btn btn-primary btn-lg" href="#" role="button">更多</a>
       </div>
     </div>
     <div class="container">
@@ -79,10 +60,18 @@
           <div class="card h-100">
             <img src="../../static/img/yuan.jpg" class="card-img-top w-50 m-auto" alt="..." />
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p
-                class="card-text"
-              >This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <h5 class="card-title">标题一</h5>
+              <p class="card-text">标题一描述内容</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col mb-4">
+          <div class="card h-100">
+            <img src="../../static/img/yuan.jpg" class="card-img-top w-50 m-auto" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">标题二</h5>
+              <p class="card-text">标题二描述内容</p>
             </div>
           </div>
         </div>
@@ -90,8 +79,8 @@
           <div class="card h-100">
             <img src="../../static/img/yuan.jpg" class="card-img-top w-50 m-auto" alt="..." />
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a short card.</p>
+              <h5 class="card-title">标题三</h5>
+              <p class="card-text">标题三描述内容</p>
             </div>
           </div>
         </div>
@@ -99,21 +88,8 @@
           <div class="card h-100">
             <img src="../../static/img/yuan.jpg" class="card-img-top w-50 m-auto" alt="..." />
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p
-                class="card-text"
-              >This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col mb-4">
-          <div class="card h-100">
-            <img src="../../static/img/yuan.jpg" class="card-img-top w-50 m-auto" alt="..." />
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p
-                class="card-text"
-              >This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <h5 class="card-title">标题四</h5>
+              <p class="card-text">标题四描述内容</p>
             </div>
           </div>
         </div>
@@ -121,55 +97,94 @@
     </div>
 
     <div class="container">
-      <hr />
+      <div
+        class="row mt-5 mb-5 pb-5 pt-5 border-bottom"
+        v-for="(article,key) in articles"
+        :key="key"
+      >
+        <div :class="[{'col-md-7':key%2!=1},{'col-md-5':key%2!=0}]">
+          <h1 v-if="key%2!=1">{{article.title}}</h1>
+          <p v-if="key%2!=1">{{article.subtitle}}</p>
 
-      <div class="row mt-5 mb-5">
-        <div class="col-md-7">
-          <h1>标题1</h1>
-          <p>段落内容段落内容段落内容段落内容段落内容段落内容段落内容段落内容段落内容段落内容段落内容</p>
+          <img v-if="key%2!=0" src="../../static/img/1.jpg" class="w-100 h-auto" />
         </div>
-        <div class="col-md-5">
-          <img src="../../static/img/1.jpg" class="w-100 h-auto" />
+        <div :class="[{'col-md-7':key%2!=0},{'col-md-5':key%2!=1}]">
+          <h1 v-if="key%2!=0">{{article.title}}</h1>
+          <p v-if="key%2!=0">{{article.subtitle}}</p>
+          <img v-if="key%2!=1" src="../../static/img/1.jpg" class="w-100 h-auto" />
         </div>
       </div>
-      <hr />
-      <div class="row mt-5 mb-5">
-        <div class="col-md-5">
-          <img src="../../static/img/1.jpg" class="w-100 h-auto" />
-        </div>
-
-        <div class="col-md-7">
-          <h1>标题1</h1>
-          <p>段落内容段落内容段落内容段落内容段落内容段落内容段落内容段落内容段落内容段落内容段落内容</p>
-        </div>
-      </div>
-
-      <hr />
-
-      <div class="row mt-5 mb-5">
-        <div class="col-md-7">
-          <h1>标题1</h1>
-          <p>段落内容段落内容段落内容段落内容段落内容段落内容段落内容段落内容段落内容段落内容段落内容</p>
-        </div>
-        <div class="col-md-5">
-          <img src="../../static/img/1.jpg" class="w-100 h-auto" />
-        </div>
-      </div>
-
-      <hr />
     </div>
 
     <div class="footer w-100 bg-dark mt-5 pt-5 text-white">
       <div class="container">
-        <a href="#" class="stretched-link ml-3 text-white">链接1</a>
-        <a href="#" class="stretched-link ml-3 text-white">链接1</a>
-        <a href="#" class="stretched-link ml-3 text-white">链接1</a>
-        <a href="#" class="stretched-link ml-3 text-white">链接1</a>
-        <a href="#" class="stretched-link ml-3 text-white">链接1</a>
-        <a href="#" class="stretched-link ml-3 text-white">链接1</a>
-        <a href="#" class="stretched-link ml-3 text-white">链接1</a>
-        <a href="#" class="stretched-link ml-3 text-white">链接1</a>
-        <a href="#" class="stretched-link ml-3 text-white">链接1</a>
+        <div class="row">
+          <div class="col-md-3">
+            <ul class="list-unstyled">
+              <li>
+                <a href="#" class="nav-link ml-3 text-white">链接1</a>
+              </li>
+              <li>
+                <a href="#" class="nav-link ml-3 text-info">链接1</a>
+              </li>
+              <li>
+                <a href="#" class="nav-link ml-3 text-info">链接1</a>
+              </li>
+              <li>
+                <a href="#" class="nav-link ml-3 text-info">链接1</a>
+              </li>
+              <li>
+                <a href="#" class="nav-link ml-3 text-info">链接1</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <ul class="list-unstyled">
+              <li>
+                <a href="#" class="nav-link ml-3 text-white">链接1</a>
+              </li>
+              <li>
+                <a href="#" class="nav-link ml-3 text-info">链接1</a>
+              </li>
+              <li>
+                <a href="#" class="nav-link ml-3 text-info">链接1</a>
+              </li>
+              <li>
+                <a href="#" class="nav-link ml-3 text-info">链接1</a>
+              </li>
+              <li>
+                <a href="#" class="nav-link ml-3 text-info">链接1</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <ul class="list-unstyled">
+              <li>
+                <a href="#" class="nav-link ml-3 text-white">链接1</a>
+              </li>
+              <li>
+                <a href="#" class="nav-link ml-3 text-info">链接1</a>
+              </li>
+              <li>
+                <a href="#" class="nav-link ml-3 text-info">链接1</a>
+              </li>
+              <li>
+                <a href="#" class="nav-link ml-3 text-info">链接1</a>
+              </li>
+              <li>
+                <a href="#" class="nav-link ml-3 text-info">链接1</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <figure class="figure">
+              <img src="../../static/img/2.jpg" class="figure-img img-fluid rounded" alt="..." />
+              <figcaption
+                class="figure-caption text-right text-white"
+              >A caption for the above image.</figcaption>
+            </figure>
+          </div>
+        </div>
 
         <blockquote class="blockquote text-center mt-5 pt-5">
           <p class="mb-0"></p>
@@ -182,29 +197,89 @@
     </div>
 
     <div class="fixed-bottom-right">
-    
-<ul class="list-group">
-  <li class="list-group-item active">免费咨询</li>
-  <li class="list-group-item"><a href="#" >咨询方式一</a></li>
-  <li class="list-group-item"><a href="#" >咨询方式一</a></li>
-  <li class="list-group-item"><a href="#" >咨询方式一</a></li>
-  <li class="list-group-item"><a href="#" >回到顶部</a></li>
-</ul>
+      <ul class="list-group">
+        <li class="list-group-item active">免费咨询</li>
+        <li class="list-group-item">
+          <a
+            href="#"
+            data-toggle="modal"
+            data-target="#exampleModal"
+            data-whatever="@getbootstrap"
+          >提交问题</a>
+        </li>
+        <li class="list-group-item">
+          <a href="#">在线咨询</a>
+        </li>
 
+        <li class="list-group-item">
+          <a href="#">回到顶部</a>
+        </li>
+      </ul>
+    </div>
 
-      
-  
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">提交问题</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">联系方式:</label>
+                <input
+                  type="text"
+                  placeholder="邮箱/手机号码/其他"
+                  class="form-control"
+                  id="recipient-name"
+                />
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">问题描述:</label>
+                <textarea class="form-control" id="message-text">请输入</textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary">提交</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "index",
   data() {
     return {
-      msg: "Welcome to index"
+      articles: []
     };
+  },
+  created() {
+    var that = this;
+    axios
+      .get("http://localhost:3000/user/")
+      .then(function(res) {
+        // console.log(res.data);
+        that.articles = res.data;
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
   }
 };
 </script>
@@ -214,7 +289,7 @@ export default {
 $bg-color: rgb(255, 255, 255);
 
 $border-none: 0px solid #cccccc !important;
-$min_height: 250px;
+$min_height: 450px;
 .indexbox {
   background: $bg-color;
 }
@@ -225,9 +300,9 @@ $min_height: 250px;
   min-height: $min_height;
 }
 .fixed-bottom-right {
-    position: fixed;
-    bottom: 100px;
-    right: 40px;
-    z-index: 1030;
+  position: fixed;
+  bottom: 100px;
+  right: 40px;
+  z-index: 1030;
 }
 </style>
