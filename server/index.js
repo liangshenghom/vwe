@@ -1,9 +1,7 @@
 const express=require("express");
 const app=express();
-const bodyParser = require('body-parser');
- 
 
-
+const formidableMiddleware = require('express-formidable');
 const userRouter=require("./api/user");
 
 const fankuiRouter=require("./api/fankui");
@@ -19,11 +17,14 @@ app.all('*', (req, res, next) => {
     next();
   });
 
-  app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ extended: false }));
   
+  app.use(formidableMiddleware());
+  
+
   app.use("/user",userRouter);
   app.use("/fankui",fankuiRouter);
+
+ 
 
   app.listen("3000");
 

@@ -30,15 +30,12 @@
             </ul>
             <form class="form-inline my-2 my-lg-0">
               <input
-              class="form-control mr-sm-2"
-              type="text"
-              placeholder="输入搜索内容""
-              aria-label="Search"
+                class="form-control mr-sm-2"
+                type="text"
+                placeholder="输入搜索内容"
+                aria-label="Search"
               />
-              <button
-                class="btn btn-outline-success my-2 my-sm-0"
-                type="submit"
-              >搜索</button>
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
             </form>
           </div>
         </nav>
@@ -229,32 +226,45 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">提交问题</h5>
+
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form >
-            <div class="modal-body">
+
+          <div class="modal-body">
+            <form>
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">联系方式:</label>
                 <input
                   type="text"
-                  name="contact"
                   placeholder="邮箱/手机号码/其他"
                   class="form-control"
                   id="recipient-name"
+                  v-model="formMsg.contact"
                 />
               </div>
               <div class="form-group">
                 <label for="message-text" class="col-form-label">问题描述:</label>
-                <textarea class="form-control" id="message-text" name="content" placeholder="请输入"></textarea>
+                <textarea
+                  class="form-control"
+                  v-model="formMsg.content"
+                  id="message-text"
+                  placeholder="请输入"
+                ></textarea>
               </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-              <button type="button" class="btn btn-primary" @click="onSubmit($event)">提交</button>
-            </div>
-          </form>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+            <button @click="submitForm($event)" class="btn btn-primary" data-dismiss="modal">提交</button>
+          </div>
+        </div>
+      </div>
+
+      <div v-show="isshow" class="text-center fixed-top mt-5 myLoading">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
         </div>
       </div>
     </div>
@@ -268,10 +278,11 @@ export default {
   data() {
     return {
       articles: [],
-      formMsg:{
-        contact:"",
-        content:""
-      }
+      formMsg: {
+        contact: "",
+        content: ""
+      },
+      isshow: false
     };
   },
   created() {
@@ -279,7 +290,7 @@ export default {
     axios
       .get("http://localhost:3000/user/")
       .then(function(res) {
-        // console.log(res.data);
+        //console.log(res.data);
         that.articles = res.data;
       })
       .catch(function(err) {
@@ -287,29 +298,37 @@ export default {
       });
   },
   methods: {
-    onSubmit: function(event) {
-     
+    submitForm: function(event) {
+      var that = this;
+
+      that.isshow = true;
 
       let formData = new FormData();
-      for(var key in this.formMsg){
-        formData.append(key,this.formMsg[key]);
-      }
-  console.log(formData)
-      axios({
-	    method:"post",
-	    url:"http://localhost:3000/fankui/",
-	    headers: {
-		  "Content-Type": "multipart/form-data"
-	    },
-	    withCredentials:true,
-	    data:formData
-	    }).then((res)=>{
-            console.log(res);
-      });
+      formData.append("contact", this.formMsg.contact);
+      formData.append("content", this.formMsg.content);
 
+      //根据后台接收参数格式进行修改
+      let config = {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      };
 
-     
-
+      axios
+        .post("http://localhost:3000/fankui/", formData, config)
+        .then(res => {
+          // success callback
+          console.log(res.data);
+          if (res.data) {
+            alert("提交成功！");
+          } else {
+            alert("提交失败！");
+          }
+          that.isshow = false;
+        })
+        .catch(err => {
+          // error callback
+        });
     }
   }
 };
