@@ -205,7 +205,7 @@
           >提交问题</a>
         </li>
         <li class="list-group-item">
-          <a href="#">在线咨询</a>
+          <a href="#" @click="createSocket" >在线咨询</a>
         </li>
 
         <li class="list-group-item">
@@ -268,11 +268,14 @@
         </div>
       </div>
     </div>
+
+    <div class></div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+
 export default {
   name: "index",
   data() {
@@ -282,9 +285,12 @@ export default {
         contact: "",
         content: ""
       },
-      isshow: false
+      isshow: false,
+      id:''
     };
   },
+  
+ 
   created() {
     var that = this;
     axios
@@ -329,6 +335,11 @@ export default {
         .catch(err => {
           // error callback
         });
+    },
+    
+    createSocket() {
+      
+      
     }
   }
 };

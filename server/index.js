@@ -3,8 +3,9 @@ const app=express();
 
 const formidableMiddleware = require('express-formidable');
 const userRouter=require("./api/user");
-
 const fankuiRouter=require("./api/fankui");
+//const socketRouter=require("./tcpserver/serverSocket");
+
 
 // 跨域支持
 app.all('*', (req, res, next) => {
@@ -23,6 +24,8 @@ app.all('*', (req, res, next) => {
 
   app.use("/user",userRouter);
   app.use("/fankui",fankuiRouter);
+  //app.use("/online",socketRouter);
+ 
 
  
 

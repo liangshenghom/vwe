@@ -8,7 +8,8 @@
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "build": "node build/build.js",
-    "serve": "nodemon ./server/index.js"
+    "serve": "nodemon ./server/index.js",
+    "socket": "nodemon ./server/tcpserver/serverSocket.js"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -18,9 +19,11 @@
     "jquery": "^3.4.1",
     "mysql": "^2.18.1",
     "popper.js": "^1.16.1",
+    "socket.io": "^2.3.0",
     "template-compiler": "^1.2.1",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vue-socket.io": "^3.0.7"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
