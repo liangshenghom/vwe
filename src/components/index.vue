@@ -1,5 +1,8 @@
 <template>
-  <div class="indexbox">
+
+  <div class="indexbox" v-title data-title="首页">
+
+
     <div class="top bg-dark">
       <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -205,7 +208,7 @@
           >提交问题</a>
         </li>
         <li class="list-group-item">
-          <a href="#" @click="createSocket">在线咨询</a>
+          <a href="/chat">在线咨询</a>
         </li>
 
         <li class="list-group-item">
@@ -280,13 +283,15 @@ export default {
   name: "index",
   data() {
     return {
+    
       articles: [],
       formMsg: {
         contact: "",
         content: ""
       },
       isshow: false,
-      id: ""
+      id: "",
+      
     };
   },
 
@@ -336,16 +341,6 @@ export default {
         });
     },
 
-    createSocket() {
-
-      //接收服务发来的消息
-      this.sockets.subscribe("msg", data => {
-        console.log(data);
-      });
-
-      //发送信息给服务端
-      this.$socket.emit("login", "我要登录服务器");
-    }
   }
 };
 </script>

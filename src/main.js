@@ -6,6 +6,12 @@ import router from './router'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
 
+import 'vx-easyui/dist/themes/default/easyui.css';
+import 'vx-easyui/dist/themes/icon.css';
+import 'vx-easyui/dist/themes/vue.css';
+import EasyUI from 'vx-easyui';
+
+
 import VueSocketIO from 'vue-socket.io';
 
 Vue.use(new VueSocketIO({
@@ -13,10 +19,20 @@ Vue.use(new VueSocketIO({
   connection: 'http://localhost:8088'
 }));
 
+Vue.use(EasyUI);
+
 Vue.config.productionTip = false
+
+
+Vue.directive('title', {
+  inserted: function (el, binding) {
+    document.title = el.dataset.title
+  }
+})
 
 /* eslint-disable no-new */
 new Vue({
+  
   el: '#app',
   router,
   components: { App },
