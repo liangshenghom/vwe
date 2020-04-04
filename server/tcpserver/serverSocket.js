@@ -13,21 +13,23 @@ server.listen("8088", function () {
 
 //监听socket连接
 io.on("connection", function (socket) {
+    console.log("有客户端连接！");
 
-    //用户连接上，打招呼！
+  
+   
+    
+    //接收客户端发送的数据
+    socket.on("login",function(obj){
+      console.log(obj);
+    //用户连接上，打招呼！（单个）发送数据给客户端
+   // socket.emit("msg","登录成功！");
 
-    sendToSingle(socket, { event: "来自服务器", data: "你好" });
+    //广播消息
+    socket.broadcast.emit("msg","服务器在广播消息");
 
-    //广播消息，通知其他用户某某某连接上聊天室
 
-    //监听用户发的聊天内容
-
-    //监听socket连接断开
+    })
+   
 
 
 });
-
-//单独给用户发送消息
-function sendToSingle(socket, msg){
-  socket.emit("single msg",msg);
-}

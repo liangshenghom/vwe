@@ -205,7 +205,7 @@
           >提交问题</a>
         </li>
         <li class="list-group-item">
-          <a href="#" @click="createSocket" >在线咨询</a>
+          <a href="#" @click="createSocket">在线咨询</a>
         </li>
 
         <li class="list-group-item">
@@ -286,11 +286,10 @@ export default {
         content: ""
       },
       isshow: false,
-      id:''
+      id: ""
     };
   },
-  
- 
+
   created() {
     var that = this;
     axios
@@ -336,10 +335,16 @@ export default {
           // error callback
         });
     },
-    
+
     createSocket() {
-      
-      
+
+      //接收服务发来的消息
+      this.sockets.subscribe("msg", data => {
+        console.log(data);
+      });
+
+      //发送信息给服务端
+      this.$socket.emit("login", "我要登录服务器");
     }
   }
 };
