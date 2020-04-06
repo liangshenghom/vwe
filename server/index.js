@@ -1,10 +1,14 @@
 const express=require("express");
 const app=express();
+const path=require("path");
 
 const formidableMiddleware = require('express-formidable');
 const userRouter=require("./api/user");
 const fankuiRouter=require("./api/fankui");
 //const socketRouter=require("./tcpserver/serverSocket");
+//解决页面刷新 页面挂掉问题
+var history = require('connect-history-api-fallback')
+ 
 
 
 // 跨域支持
@@ -21,11 +25,11 @@ app.all('*', (req, res, next) => {
   
   app.use(formidableMiddleware());
   
-
+  app.use('/',history());
   app.use("/user",userRouter);
   app.use("/fankui",fankuiRouter);
   //app.use("/online",socketRouter);
- 
+  app.use(express.static(path.join(__dirname, '../dist')))
 
  
 

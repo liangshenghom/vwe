@@ -14,7 +14,7 @@ server.listen("8088", function () {
 //监听socket连接
 io.on("connection", function (socket) {
   console.log("有客户端连接！", socket.id);
-
+ 
   //接收客户端发送的数据,并发送欢迎消息！
   socket.on("hello", function (obj) {
     console.log(obj);

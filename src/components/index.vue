@@ -208,7 +208,7 @@
           >提交问题</a>
         </li>
         <li class="list-group-item">
-          <a href="/chat">在线咨询</a>
+          <router-link to="chat">在线咨询</router-link>
         </li>
 
         <li class="list-group-item">

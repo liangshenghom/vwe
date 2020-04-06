@@ -41,15 +41,19 @@ export default {
       this.info = "";
     }
   },
+  created:function(){
+      
+  },
   sockets: {
     connect(data) {
       //向服务器发送消息
       this.$socket.emit("hello", "哈喽！");
       //订阅服务器发送的消息
-      this.sockets.subscribe("welcome", function(data) {
+       this.sockets.subscribe("welcome", function(data) {
         console.log(data);
         $(".chat-content").append("<h6>服务器说：" + data + "</h6>");
       });
+     
     }
   }
 };
