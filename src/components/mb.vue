@@ -16,10 +16,14 @@
       <!-- 模板分类 -->
       <div class="class_mb mt-3 border rounded p-3">
         <strong>按行业分：</strong>
-        <button type="button" v-for="(itme,key,i) in class_list" :key="i" class="btn btn-link">{{item.name}}</button>
+        <button type="button" v-for="(itme,i) in class_list" :key="i" class="btn btn-link">{{class_list[i].name}}</button>
       </div>
-      <div class="class_mb_list mt-3 border rounded p-3">
-        <div class="row row-cols-1 row-cols-md-3">
+    
+  
+    </div>
+        
+      <div class="container class_mb_list mt-3 p-3">
+        <div class="row row-cols-1 row-cols-md-4">
           <div class="col mb-4">
             <div class="card">
               <img src="../../static/img/3.jpg" class="card-img-top" alt="..." />
@@ -67,8 +71,6 @@
         </div>
       </div>
 
-  
-    </div>
     <app_footer></app_footer>
   </div>
 </template>
@@ -85,6 +87,18 @@ export default {
           "code": "0",
           "name": "酒店"
         },
+         {
+          "code": "1",
+          "name": "餐饮"
+        },
+         {
+          "code": "2",
+          "name": "医疗"
+        },
+         {
+          "code": "3",
+          "name": "旅游"
+        },
      
       ]
     };
@@ -97,7 +111,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.main {
-  min-height: 600px;
-}
+
 </style>>
