@@ -1,50 +1,8 @@
 <template>
-
   <div class="indexbox" v-title data-title="首页">
-
-
-    <div class="top bg-dark">
-      <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <a class="navbar-brand" href="#">首页</a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                <a class="nav-link text-white" href="#">导航一</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="#">导航二</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="#">导航三</a>
-              </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-              <input
-                class="form-control mr-sm-2"
-                type="text"
-                placeholder="输入搜索内容"
-                aria-label="Search"
-              />
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
-            </form>
-          </div>
-        </nav>
-      </div>
-    </div>
-
+    <!-- 公共头部 -->
+    <app_header></app_header>
+    <!-- 巨幕 -->
     <div class="container">
       <div class="container jumbotron mt-1">
         <h1 class="display-4">巨幕标题一</h1>
@@ -54,48 +12,23 @@
         <a class="btn btn-primary btn-lg" href="#" role="button">更多</a>
       </div>
     </div>
+
+    <!-- 卡片 -->
     <div class="container">
       <div class="row row-cols-1 row-cols-md-4 text-center">
-        <div class="col mb-4">
+        <div class="col mb-4" v-for="(item,i) in card_list" :key="i">
           <div class="card h-100">
             <img src="../../static/img/yuan.jpg" class="card-img-top w-50 m-auto" alt="..." />
             <div class="card-body">
-              <h5 class="card-title">标题一</h5>
-              <p class="card-text">标题一描述内容</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col mb-4">
-          <div class="card h-100">
-            <img src="../../static/img/yuan.jpg" class="card-img-top w-50 m-auto" alt="..." />
-            <div class="card-body">
-              <h5 class="card-title">标题二</h5>
-              <p class="card-text">标题二描述内容</p>
-            </div>
-          </div>
-        </div>
-        <div class="col mb-4">
-          <div class="card h-100">
-            <img src="../../static/img/yuan.jpg" class="card-img-top w-50 m-auto" alt="..." />
-            <div class="card-body">
-              <h5 class="card-title">标题三</h5>
-              <p class="card-text">标题三描述内容</p>
-            </div>
-          </div>
-        </div>
-        <div class="col mb-4">
-          <div class="card h-100">
-            <img src="../../static/img/yuan.jpg" class="card-img-top w-50 m-auto" alt="..." />
-            <div class="card-body">
-              <h5 class="card-title">标题四</h5>
-              <p class="card-text">标题四描述内容</p>
+              <h5 class="card-title">标题{{item}}</h5>
+              <p class="card-text">标题{{item}}描述内容</p>
             </div>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- 内容 -->
     <div class="container">
       <div
         class="row mt-5 mb-5 pb-5 pt-5 border-bottom"
@@ -116,86 +49,10 @@
       </div>
     </div>
 
-    <div class="footer w-100 bg-dark mt-5 pt-5 text-white">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-3">
-            <ul class="list-unstyled">
-              <li>
-                <a href="#" class="nav-link ml-3 text-white">链接1</a>
-              </li>
-              <li>
-                <a href="#" class="nav-link ml-3 text-info">链接1</a>
-              </li>
-              <li>
-                <a href="#" class="nav-link ml-3 text-info">链接1</a>
-              </li>
-              <li>
-                <a href="#" class="nav-link ml-3 text-info">链接1</a>
-              </li>
-              <li>
-                <a href="#" class="nav-link ml-3 text-info">链接1</a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-md-3">
-            <ul class="list-unstyled">
-              <li>
-                <a href="#" class="nav-link ml-3 text-white">链接1</a>
-              </li>
-              <li>
-                <a href="#" class="nav-link ml-3 text-info">链接1</a>
-              </li>
-              <li>
-                <a href="#" class="nav-link ml-3 text-info">链接1</a>
-              </li>
-              <li>
-                <a href="#" class="nav-link ml-3 text-info">链接1</a>
-              </li>
-              <li>
-                <a href="#" class="nav-link ml-3 text-info">链接1</a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-md-3">
-            <ul class="list-unstyled">
-              <li>
-                <a href="#" class="nav-link ml-3 text-white">链接1</a>
-              </li>
-              <li>
-                <a href="#" class="nav-link ml-3 text-info">链接1</a>
-              </li>
-              <li>
-                <a href="#" class="nav-link ml-3 text-info">链接1</a>
-              </li>
-              <li>
-                <a href="#" class="nav-link ml-3 text-info">链接1</a>
-              </li>
-              <li>
-                <a href="#" class="nav-link ml-3 text-info">链接1</a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-md-3">
-            <figure class="figure">
-              <img src="../../static/img/2.jpg" class="figure-img img-fluid rounded" alt="..." />
-              <figcaption
-                class="figure-caption text-right text-white"
-              >A caption for the above image.</figcaption>
-            </figure>
-          </div>
-        </div>
+    <!-- 公共页脚 -->
+    <app_footer></app_footer>
 
-        <blockquote class="blockquote text-center mt-5 pt-5">
-          <p class="mb-0"></p>
-          <footer class="blockquote-footer text-white">
-            Copyright © 2020 Sgky . All rights reserved.
-            <cite title="Source Title"></cite>
-          </footer>
-        </blockquote>
-      </div>
-    </div>
-
+    <!-- 悬浮框-->
     <div class="fixed-bottom-right">
       <ul class="list-group">
         <li class="list-group-item active">免费咨询</li>
@@ -217,6 +74,7 @@
       </ul>
     </div>
 
+    <!-- 弹出框 -->
     <div
       class="modal fade"
       id="exampleModal"
@@ -265,6 +123,7 @@
         </div>
       </div>
 
+      <!-- loading 载入显示 -->
       <div v-show="isshow" class="text-center fixed-top mt-5 myLoading">
         <div class="spinner-border" role="status">
           <span class="sr-only">Loading...</span>
@@ -272,18 +131,19 @@
       </div>
     </div>
 
-    <div class></div>
+    <!-- 结束 -->
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import app_header from "./header";
+import app_footer from "./footer";
 
 export default {
   name: "index",
   data() {
     return {
-    
       articles: [],
       formMsg: {
         contact: "",
@@ -291,8 +151,12 @@ export default {
       },
       isshow: false,
       id: "",
-      
+      card_list: [1, 2, 3, 4]
     };
+  },
+  components: {
+    app_header,
+    app_footer
   },
 
   created() {
@@ -339,8 +203,7 @@ export default {
         .catch(err => {
           // error callback
         });
-    },
-
+    }
   }
 };
 </script>
@@ -350,16 +213,14 @@ export default {
 $bg-color: rgb(255, 255, 255);
 
 $border-none: 0px solid #cccccc !important;
-$min_height: 450px;
+
 .indexbox {
   background: $bg-color;
 }
 .card {
   border: $border-none;
 }
-.footer {
-  min-height: $min_height;
-}
+
 .fixed-bottom-right {
   position: fixed;
   bottom: 100px;
