@@ -6,7 +6,7 @@ import index from '@/components/index'
 import chat from '@/components/chat'
 import mb from '@/components/mb'
 import detail from '@/components/detail'
-
+import adminlogin from '@/components/admin/login'
 
 
 Vue.use(Router)
@@ -34,6 +34,12 @@ export default new Router({
       path:'/detail',
       name:'detail',
       component:detail
+    }
+    ,
+    {
+      path:'/admin/login',
+      name:'adminlogin',
+      component:adminlogin
     }
 
   ]

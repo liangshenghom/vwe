@@ -21,7 +21,9 @@
     "popper.js": "^1.16.1",
     "socket.io": "^2.3.0",
     "template-compiler": "^1.2.1",
+    "vee-validate": "^2.0.0",
     "vue": "^2.5.2",
+    "vue-i18n": "^8.16.0",
     "vue-router": "^3.0.1",
     "vue-socket.io": "^3.0.7",
     "vx-easyui": "^1.2.6"

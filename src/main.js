@@ -14,6 +14,26 @@ import EasyUI from 'vx-easyui';
 
 import VueSocketIO from 'vue-socket.io';
 
+import VueI18n from 'vue-i18n';
+import VeeValidate from 'vee-validate';
+import zh_CN from 'vee-validate/dist/locale/zh_CN'
+ 
+//启用Vue国际化插件
+Vue.use(VueI18n)
+ 
+//配置VeeValidate
+const i18n = new VueI18n({
+  locale: 'zh_CN',
+})
+ 
+Vue.use(VeeValidate, {
+  i18n,
+  i18nRootKey: 'validation',
+  dictionary: {
+    zh_CN
+  }
+});
+
 
 Vue.use(new VueSocketIO({
   debug: true,
