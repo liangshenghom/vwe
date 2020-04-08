@@ -1,9 +1,12 @@
 const express = require("express");
 const route = express.Router();
+const session = require("express-session");
 
-route.get("/", function (req, res) {
+route.post("/", function (req, res) {
 
-    res.send("退出登录路由");
+    req.session.destroy();  
+    
+    res.send("已退出登录");
 });
 
 module.exports = route;

@@ -8,7 +8,7 @@ const sql = require("../sql/userSql");
 
 route.post("/", function (req, res) {
 
-
+     var res_msg=[{code:"",name:""}];
     var username = req.fields.username;
     var password = req.fields.password;
 
@@ -22,16 +22,20 @@ route.post("/", function (req, res) {
 
                 //console.log("用户名跟密码都相同");
                 req.session.name = username;
-                res.send(true)
+                res_msg[0].code=1;
+                res_msg[0].name=username;
+                res.send(res_msg)
 
 
             }
             else {
-                res.send(false)
+                res_msg[0].code=0;
+                res.send(res_msg)
             }
         }
         else {
-            res.send(false)
+            res_msg[0].code=0;
+            res.send(res_msg)
         }
     });
 

@@ -85,15 +85,15 @@ export default {
           axios
             .post("http://localhost:3000/login/", formData, config)
             .then(res => {
-              if (res.data) {
+              console.log(res.data[0].code);
+              if (res.data[0].code) {
                 console.log("登录成功！");
-                localStorage.setItem('name',res.data);
-                location.href='/admin/index'
-                
+                localStorage.setItem("name", res.data[0].name);
+
+                location.href = "/admin/index";
               } else {
                 console.log("登录失败！");
                 alert("登录失败！");
-               
               }
             })
             .catch(err => {
