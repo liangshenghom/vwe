@@ -18,10 +18,6 @@ function query(sql, values, callback) {
             con.release();
 
 
-
-
-
-
         });
 
     });

@@ -43,7 +43,7 @@
                   v-show="errors.has('password')"
                 >{{ errors.first('password') }}</small>
               </div>
-              <div class="form-group form-check"></div>
+              <div class="loginresult form-group form-check"></div>
               <div class="text-center">
                 <button type="submit" class="btn btn-primary pl-5 pr-5">登 录</button>
               </div>
@@ -87,8 +87,13 @@ export default {
             .then(res => {
               if (res.data) {
                 console.log("登录成功！");
+                localStorage.setItem('name',res.data);
+                location.href='/admin/index'
+                
               } else {
                 console.log("登录失败！");
+                alert("登录失败！");
+               
               }
             })
             .catch(err => {
