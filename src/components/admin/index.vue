@@ -1,47 +1,30 @@
 <template>
   <div>
-    <div class="top container-fluid shadow-sm bg-dark text-white">
-      <div class="row">
-        <div class="col-sm-2 pt-3 pb-3">管理后台</div>
-        <div class="col-sm-8 pt-3 pb-3"></div>
-        <div class="col-sm-2 pt-3 pb-3 text-right">
-          <a href="javascript:void(0);" class="btn text-white btn-link" @click="logout">退出</a>
+    <div class="f-column">
+      <div class="main-header f-row">
+        <div class="f-row f-full">
+          <div class="main-title f-animate f-row" :style="{width:width+'px'}">
+            <span v-if="!collapsed">{{title}}</span>
+          </div>
+          <div class="main-bar f-full">
+            <span class="main-toggle fa fa-bars" @click="toggle()"></span>
+       
+          </div>
+               <a class="text-white pl-3 pr-3" @click="logout" href="javascript:void(0)" ><small>退出登录</small></a>
         </div>
       </div>
-    </div>
-    <div class="main container-fluid">
-      <div class="row">
-        <div class="left col-sm-2 border-right">
-          <h2>Accordion Style</h2>
-          <Accordion class="a1" :animate="true">
-            <AccordionPanel
-              v-for="menu in menus"
-              :key="menu.text"
-              :title="menu.text"
-              :iconCls="'fa fa-'+menu.iconCls"
-            >
-              <div style="padding: 5px">
-                <a class="item" href="#" v-for="item in menu.submenus" :key="item">{{item}}</a>
-              </div>
-            </AccordionPanel>
-          </Accordion>
+      <div class="f-row f-full">
+        <div class="sidebar-body f-animate" :style="{width:width+'px'}">
+          <div v-if="!collapsed" class="sidebar-user">菜单管理</div>
+          <SideMenu
+            :data="menus"
+            :border="false"
+            :collapsed="collapsed"
+            @itemClick="onItemClick($event)"
+          ></SideMenu>
         </div>
-
-        <div class="right col-sm-10">
-          <Tabs class="mt-3" style="height:250px">
-            <TabPanel :title="'Tab1'">
-              <p>Tab Panel1</p>
-            </TabPanel>
-            <TabPanel :title="'Tab2'">
-              <p>Tab Panel2</p>
-            </TabPanel>
-            <TabPanel :title="'Tab3'">
-              <p>Tab Panel3</p>
-            </TabPanel>
-            <TabPanel :title="'Help'" :closable="true" iconCls="icon-help">
-              <p>This is the help content.</p>
-            </TabPanel>
-          </Tabs>
+        <div class="main-body f-full">
+          <p v-if="selectedMenu">{{selectedMenu.text}}</p>
         </div>
       </div>
     </div>
@@ -53,21 +36,61 @@ import axios from "axios";
 export default {
   data() {
     return {
+      title: "后台管理",
+      width: 200,
+      collapsed: false,
+      selectedMenu: null,
       menus: [
         {
-          text: "Forms",
-          iconCls: "wpforms",
-          submenus: ["Form Element", "Wizard", "File Upload"]
+          text: "模板管理",
+          iconCls: "fa fa-wpforms",
+          //state: "open",
+          children: [
+            {
+              text: "模板详情"
+            },
+            {
+              text: "模板列表"
+            },
+            {
+              text: "模板分类"
+            }
+          ]
         },
         {
-          text: "Mail",
-          iconCls: "at",
-          submenus: ["Inbox", "Sent", "Trash"]
+          text: "用户管理",
+          iconCls: "fa fa-at",
+          selected: true,
+          children: [
+            {
+              text: "信息修改"
+            },
+          
+            {
+              text: "权限管理",
+              children: [
+                {
+                  text: "最高权限"
+                },
+                {
+                  text: "普通权限"
+                }
+              ]
+            }
+          ]
         },
         {
-          text: "Layout",
-          iconCls: "table",
-          submenus: ["Panel", "Accordion", "Tabs"]
+          text: "系统管理",
+          iconCls: "fa fa-table",
+          children: [
+            {
+              text: "系统信息"
+            },
+            {
+              text: "开发人员"
+            },
+       
+          ]
         }
       ]
     };
@@ -96,14 +119,122 @@ export default {
           location.href = "/admin/login";
         })
         .catch(err => {});
+    },
+
+    toggle() {
+      this.collapsed = !this.collapsed;
+      this.width = this.collapsed ? 50 : 200;
+    },
+    onItemClick(item) {
+      this.selectedMenu = item;
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.left {
-  min-height: 900px;
+.sidemenu .accordion .panel-title {
+  color: #b8c7ce;
+}
+.sidemenu .accordion .accordion-header {
+  background: #222d32;
+  color: #b8c7ce;
+}
+.sidemenu .accordion .accordion-body {
+  background: #2c3b41;
+  color: #8aa4af;
+}
+.sidemenu .accordion .accordion-header-selected {
+  background: #1e282c;
+}
+.sidemenu .tree-node-hover {
+  background: #2c3b41;
+  color: #fff;
+}
+.sidemenu .tree-node-selected {
+  background: #2c3b41;
+  color: #fff;
+}
+.sidemenu .accordion-header .panel-tool {
+  display: none;
+}
+.sidemenu .accordion-header::after,
+.sidemenu .tree-node-nonleaf::after {
+  display: inline-block;
+  vertical-align: top;
+  border-style: solid;
+  transform: rotate(45deg);
+  width: 4px;
+  height: 4px;
+  content: "";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  margin-top: -3px;
+  border-width: 0 1px 1px 0;
+}
+.sidemenu .accordion-header-selected::after {
+  transform: rotate(-135deg);
+}
+.sidemenu .tree-node-nonleaf::after {
+  transform: rotate(-135deg);
+}
+.sidemenu .tree-node-nonleaf-collapsed::after {
+  transform: rotate(45deg);
+}
+.sidemenu-collapsed .accordion-header::after {
+  display: none;
+}
+.sidemenu-tooltip .accordion {
+  border-color: #1e282c;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+.app-logo {
+  width: 24px;
+  height: 24px;
+  color: #fff;
+  margin: 13px 10px;
+}
+.main-header {
+  background: #3c8dbc;
+  color: #fff;
+  line-height: 50px;
+  height: 50px;
+}
+.main-title {
+  background: #367fa9;
+  font-size: 20px;
+  text-align: center;
+  overflow: hidden;
+}
+.main-bar {
+  background: #3c8dbc;
+}
+.main-toggle {
+  position: relative;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  color: #fff;
+  margin: 0 10px;
+}
+.main-body {
+  background: #ecf0f5;
+  min-height: 888px;
+}
+.sidebar-body {
+  background: #222d32;
+}
+.sidebar-user {
+  color: #fff;
+  padding: 20px;
+  line-height: 20px;
 }
 </style>
 
