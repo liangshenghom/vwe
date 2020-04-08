@@ -12,12 +12,12 @@ function query(sql, values, callback) {
             //console.log(results);
 
             //每次查询都会回调
-            callback(results);
+            callback(err, results);
 
             //只是释放连接 在缓存池中，没有被销毁
             con.release();
 
-
+            if (err) throw error;
 
 
 
@@ -29,6 +29,6 @@ function query(sql, values, callback) {
 
 }
 
-exports.query = query
+exports.query=query
 
 

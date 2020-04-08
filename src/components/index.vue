@@ -162,7 +162,7 @@ export default {
   created() {
     var that = this;
     axios
-      .get("http://localhost:3000/user/")
+      .get("http://localhost:3000/article/")
       .then(function(res) {
         //console.log(res.data);
         that.articles = res.data;

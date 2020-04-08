@@ -1,5 +1,5 @@
 //查询管理类
 var userSql = {
-    select: "select * from  article"
+    select: "select password from  user where username=?"
 }
 module.exports = userSql;

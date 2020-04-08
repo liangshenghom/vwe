@@ -42,6 +42,8 @@ Vue.use(new VueSocketIO({
 
 Vue.use(EasyUI);
 
+
+
 Vue.config.productionTip = false
 
 //设置网页标题
