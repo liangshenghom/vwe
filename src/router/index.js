@@ -11,6 +11,7 @@ import adminindex from '@/components/admin/index'
 
 
 
+
 Vue.use(Router)
 
 export default new Router({

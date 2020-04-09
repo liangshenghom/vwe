@@ -9,6 +9,7 @@
           </div>
           <div class="main-bar f-full">
             <span class="main-toggle icon iconfont icon-icon-test39" @click="toggle()"></span>
+            <span class="ml-5 menu-index" @click="showindex()">首页</span>
           </div>
 
           <a class="username text-white pl-3 pr-3" href="javascript:void(0)">
@@ -31,8 +32,8 @@
           ></SideMenu>
         </div>
         <div class="main-body f-full">
-          <!--  <p v-if="selectedMenu">{{selectedMenu.text}}</p> -->
-          <div v-show="isShowIndex" class="container-fluid pt-3">
+          <!-- 后台首页 -->
+          <div v-if="isShowIndex" class="container-fluid pt-3">
             <div class="row">
               <div class="col-sm-4">
                 <div id="echarts1">
@@ -65,7 +66,15 @@
             </div>
           </div>
 
-            
+          <!-- 用户信息修改页面 -->
+          <div v-if="isShowUserUpdate" class="container-fluid pt-3">
+            <div class="row">
+              <div class="col-sm-12">
+                 <adminUser></adminUser>
+              </div>
+           
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -74,6 +83,7 @@
 
 <script>
 import axios from "axios";
+import adminUser from "./userUpdate";
 
 export default {
   data() {
@@ -105,7 +115,8 @@ export default {
           ]
         }
       ],
-      isShowIndex:true,
+      isShowIndex: true,
+      isShowUserUpdate: false,
       username: "用户名",
       title: "后台管理",
       width: 230,
@@ -118,10 +129,10 @@ export default {
           selected: true,
           children: [
             {
-              text: "信息修改"
-            },
+              text: "用户列表"
+            }
 
-            {
+            /* {
               text: "权限管理",
               children: [
                 {
@@ -131,7 +142,7 @@ export default {
                   text: "普通权限"
                 }
               ]
-            }
+            } */
           ]
         },
         {
@@ -212,7 +223,25 @@ export default {
     onItemClick(item) {
       this.selectedMenu = item;
       console.log(item);
+      if (item.text == "用户列表") {
+        this.isShowUserUpdate = true;
+        this.isShowIndex = false;
+      }
+    },
+    afterSet: function(echarts) {
+      var bmap = echarts
+        .getModel()
+        .getComponent("bmap")
+        .getBMap();
+      bmap.addControl(new window.BMap.MapTypeControl());
+    },
+    showindex() {
+      this.isShowUserUpdate = false;
+      this.isShowIndex = true;
     }
+  },
+  components: {
+    adminUser
   }
 };
 </script>
@@ -324,6 +353,10 @@ body {
 }
 .username {
   text-decoration: none;
+}
+.menu-index:hover {
+  cursor: pointer;
+  color: #b8c7ce;
 }
 </style>
 
