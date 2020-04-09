@@ -1,16 +1,23 @@
 <template>
-  <div>
+  <div class="adminindex">
     <div class="f-column">
       <div class="main-header f-row">
         <div class="f-row f-full">
           <div class="main-title f-animate f-row" :style="{width:width+'px'}">
+            <img class="app-logo" src="../../../static/img/adminicon.png" />
             <span v-if="!collapsed">{{title}}</span>
           </div>
           <div class="main-bar f-full">
-            <span class="main-toggle fa fa-bars" @click="toggle()"></span>
-       
+            <span class="main-toggle icon iconfont icon-icon-test39" @click="toggle()"></span>
           </div>
-               <a class="text-white pl-3 pr-3" @click="logout" href="javascript:void(0)" ><small>退出登录</small></a>
+
+          <a class="username text-white pl-3 pr-3" href="javascript:void(0)">
+            <span class="icon iconfont icon-icon-test35"></span>
+            {{username}}
+          </a>
+          <a class="text-white pl-3 pr-3" @click="logout" href="javascript:void(0)">
+            <span class style="font-size:13px;">退出</span>
+          </a>
         </div>
       </div>
       <div class="f-row f-full">
@@ -24,7 +31,41 @@
           ></SideMenu>
         </div>
         <div class="main-body f-full">
-          <p v-if="selectedMenu">{{selectedMenu.text}}</p>
+          <!--  <p v-if="selectedMenu">{{selectedMenu.text}}</p> -->
+          <div v-show="isShowIndex" class="container-fluid pt-3">
+            <div class="row">
+              <div class="col-sm-4">
+                <div id="echarts1">
+                  <ve-line :data="chartData" width="100%"></ve-line>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <ve-histogram :data="chartData"></ve-histogram>
+              </div>
+              <div class="col-sm-4">
+                <ve-bar :data="chartData"></ve-bar>
+              </div>
+            </div>
+
+            <div class="row mt-5">
+              <div class="col-sm-4">
+                <ve-bmap
+                  :settings="chartSettings"
+                  :after-set-option-once="afterSet"
+                  :series="chartSeries"
+                  :tooltip="chartTooltip"
+                ></ve-bmap>
+              </div>
+              <div class="col-sm-4">
+                <ve-radar :data="chartData"></ve-radar>
+              </div>
+              <div class="col-sm-4">
+                <ve-map :data="chartData"></ve-map>
+              </div>
+            </div>
+          </div>
+
+            
         </div>
       </div>
     </div>
@@ -33,39 +74,53 @@
 
 <script>
 import axios from "axios";
+
 export default {
   data() {
+    this.chartSettings = {
+      key: "oBvDtR6nzWtVchkY4cLHtnah1VVZQKRK",
+      bmap: {
+        center: [120, 30],
+        zoom: 14,
+        roam: true,
+        mapStyle: {}
+      }
+    };
+    this.chartTooltip = { show: true };
     return {
+      chartData: {
+        columns: ["日期", "访问用户", "下单用户"],
+        rows: [
+          { 日期: "2018-05-22", 访问用户: 32371, 下单用户: 19810 },
+          { 日期: "2018-05-23", 访问用户: 12328, 下单用户: 4398 },
+          { 日期: "2018-05-24", 访问用户: 92381, 下单用户: 52910 }
+        ]
+      },
+      chartSeries: [
+        {
+          type: "scatter",
+          coordinateSystem: "bmap",
+          data: [
+            [120, 30, 1] // 经度，维度，value，...
+          ]
+        }
+      ],
+      isShowIndex:true,
+      username: "用户名",
       title: "后台管理",
-      width: 200,
+      width: 230,
       collapsed: false,
       selectedMenu: null,
       menus: [
         {
-          text: "模板管理",
-          iconCls: "fa fa-wpforms",
-          //state: "open",
-          children: [
-            {
-              text: "模板详情"
-            },
-            {
-              text: "模板列表"
-            },
-            {
-              text: "模板分类"
-            }
-          ]
-        },
-        {
           text: "用户管理",
-          iconCls: "fa fa-at",
+          iconCls: "iconfont icon-icon-test35",
           selected: true,
           children: [
             {
               text: "信息修改"
             },
-          
+
             {
               text: "权限管理",
               children: [
@@ -80,25 +135,54 @@ export default {
           ]
         },
         {
+          text: "模板管理",
+          iconCls: "icon iconfont icon-icon-test38",
+          //state: "open",
+          children: [
+            {
+              text: "编辑详情"
+            },
+            {
+              text: "模板列表"
+            },
+            {
+              text: "模板分类"
+            }
+          ]
+        },
+        {
+          text: "信息采集",
+          iconCls: "icon iconfont icon-icon-test21",
+          //state: "open",
+          children: [
+            {
+              text: "网络爬虫"
+            }
+          ]
+        },
+        {
           text: "系统管理",
-          iconCls: "fa fa-table",
+          iconCls: "iconfont icon-icon-test16",
           children: [
             {
               text: "系统信息"
             },
             {
               text: "开发人员"
-            },
-       
+            }
           ]
         }
       ]
     };
   },
+
+  created() {
+    //统一转大写
+    this.username = localStorage.getItem("name").toUpperCase();
+  },
   methods: {
     logout: function() {
       var name = localStorage.getItem("name");
-
       //console.log(result);
       let formData = new FormData();
       formData.append("username", name);
@@ -127,12 +211,14 @@ export default {
     },
     onItemClick(item) {
       this.selectedMenu = item;
+      console.log(item);
     }
   }
 };
 </script>
 
-<style lang="scss" scoped>
+
+<style  scoped>
 .sidemenu .accordion .panel-title {
   color: #b8c7ce;
 }
@@ -235,6 +321,9 @@ body {
   color: #fff;
   padding: 20px;
   line-height: 20px;
+}
+.username {
+  text-decoration: none;
 }
 </style>
 

@@ -1,5 +1,6 @@
 <template>
   <div class="login">
+    
     <div class="container pt-5">
       <div class="row">
         <div class="col-md-3"></div>
@@ -53,11 +54,14 @@
         <div class="col-md-3"></div>
       </div>
     </div>
+  
   </div>
 </template>
 
 <script>
 import axios from "axios";
+
+
 
 export default {
   data() {
@@ -107,5 +111,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
+
 </style>

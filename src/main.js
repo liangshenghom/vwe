@@ -17,6 +17,14 @@ import VueSocketIO from 'vue-socket.io';
 import VueI18n from 'vue-i18n';
 import VeeValidate from 'vee-validate';
 import zh_CN from 'vee-validate/dist/locale/zh_CN'
+
+import "@/assert/icon/iconfont.css"
+
+//图表包
+import VCharts from 'v-charts'
+
+Vue.use(VCharts)
+
  
 //启用Vue国际化插件
 Vue.use(VueI18n)
