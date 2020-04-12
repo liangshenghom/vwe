@@ -327,6 +327,7 @@ body {
   padding: 0rem;
   font-size: 14px;
   line-height: 30px;
+  min-width: 2rem;
 }
 </style>
 
