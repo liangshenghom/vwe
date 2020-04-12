@@ -1,8 +1,8 @@
 <template>
-  <div class="w-100">
+  <div class="">
     <h2>用户列表</h2>
     <LinkButton iconCls="icon-add" @click="addRow()" style="width:80px;margin-bottom:4px">Add</LinkButton>
-    <DataGrid :data="data" style="height:250px">
+    <DataGrid :data="data" style="height:250px;width:800px;">
       <GridColumn field="itemid" title="Item ID"></GridColumn>
       <GridColumn field="name" title="Name"></GridColumn>
       <GridColumn field="listprice" title="List Price" align="right"></GridColumn>
@@ -250,7 +250,7 @@ export default {
   }
 };
 </script>
-<style>
+<style lang="scss" scoped>
 .buttons {
   text-align: right;
   padding: 10px;
@@ -265,7 +265,5 @@ export default {
   margin: 4px 0;
   margin-left: 80px;
 }
-.datagrid-header-inner{
-    width:auto;
-}
+
 </style>

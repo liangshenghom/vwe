@@ -66,5 +66,8 @@ npm install sass-loader@7.3.1 --save-dev
       .catch(function(err) {
         console.log(err);
       });
+# nvm 列出所有可安装nodejs 版本
+windows ：nvm ls available
+其他 nvm ls-remote
 
  

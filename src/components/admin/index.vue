@@ -12,13 +12,22 @@
             <span class="ml-5 menu-index" @click="showindex()">首页</span>
           </div>
 
-          <a class="username text-white pl-3 pr-3" href="javascript:void(0)">
-            <span class="icon iconfont icon-icon-test35"></span>
-            {{username}}
-          </a>
-          <a class="text-white pl-3 pr-3" @click="logout" href="javascript:void(0)">
-            <span class style="font-size:13px;">退出</span>
-          </a>
+          <div class="dropdown">
+            <a
+              class="btn dropdown-toggle mr-3"
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <span class="icon iconfont icon-icon-test35"></span>
+              {{username}}
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" @click="logout" href="#" >退出</a>
+            </div>
+          </div>
         </div>
       </div>
       <div class="f-row f-full">
@@ -33,48 +42,13 @@
         </div>
         <div class="main-body f-full">
           <!-- 后台首页 -->
-          <div v-if="isShowIndex" class="container-fluid pt-3">
-            <div class="row">
-              <div class="col-sm-4">
-                <div id="echarts1">
-                  <ve-line :data="chartData" width="100%"></ve-line>
-                </div>
-              </div>
-              <div class="col-sm-4">
-                <ve-histogram :data="chartData"></ve-histogram>
-              </div>
-              <div class="col-sm-4">
-                <ve-bar :data="chartData"></ve-bar>
-              </div>
-            </div>
+          <div v-if="isShowIndex">11</div>
 
-            <div class="row mt-5">
-              <div class="col-sm-4">
-                <ve-bmap
-                  :settings="chartSettings"
-                  :after-set-option-once="afterSet"
-                  :series="chartSeries"
-                  :tooltip="chartTooltip"
-                ></ve-bmap>
-              </div>
-              <div class="col-sm-4">
-                <ve-radar :data="chartData"></ve-radar>
-              </div>
-              <div class="col-sm-4">
-                <ve-map :data="chartData"></ve-map>
-              </div>
-            </div>
-          </div>
+          <adminUser v-if="isShowUserUpdate"></adminUser>
 
-          <!-- 用户信息修改页面 -->
-          <div v-if="isShowUserUpdate" class="container-fluid pt-3">
-            <div class="row">
-              <div class="col-sm-12">
-                 <adminUser></adminUser>
-              </div>
-           
-            </div>
-          </div>
+          <!-- 大数据UI -->
+
+          <bdataui v-if="isShowDataUI"></bdataui>
         </div>
       </div>
     </div>
@@ -84,39 +58,14 @@
 <script>
 import axios from "axios";
 import adminUser from "./userUpdate";
+import bdataui from "./BDataUi";
 
 export default {
   data() {
-    this.chartSettings = {
-      key: "oBvDtR6nzWtVchkY4cLHtnah1VVZQKRK",
-      bmap: {
-        center: [120, 30],
-        zoom: 14,
-        roam: true,
-        mapStyle: {}
-      }
-    };
-    this.chartTooltip = { show: true };
     return {
-      chartData: {
-        columns: ["日期", "访问用户", "下单用户"],
-        rows: [
-          { 日期: "2018-05-22", 访问用户: 32371, 下单用户: 19810 },
-          { 日期: "2018-05-23", 访问用户: 12328, 下单用户: 4398 },
-          { 日期: "2018-05-24", 访问用户: 92381, 下单用户: 52910 }
-        ]
-      },
-      chartSeries: [
-        {
-          type: "scatter",
-          coordinateSystem: "bmap",
-          data: [
-            [120, 30, 1] // 经度，维度，value，...
-          ]
-        }
-      ],
       isShowIndex: true,
       isShowUserUpdate: false,
+      isShowDataUI: false,
       username: "用户名",
       title: "后台管理",
       width: 230,
@@ -143,6 +92,16 @@ export default {
                 }
               ]
             } */
+          ]
+        },
+
+        {
+          text: "监控管理",
+          iconCls: "iconfont icon-icon-test16",
+          children: [
+            {
+              text: "大数据UI"
+            }
           ]
         },
         {
@@ -189,7 +148,7 @@ export default {
 
   created() {
     //统一转大写
-    this.username = localStorage.getItem("name").toUpperCase();
+    this.username = localStorage.getItem("name");
   },
   methods: {
     logout: function() {
@@ -226,6 +185,11 @@ export default {
       if (item.text == "用户列表") {
         this.isShowUserUpdate = true;
         this.isShowIndex = false;
+        this.isShowDataUI = false;
+      } else if (item.text == "大数据UI") {
+        this.isShowDataUI = true;
+        this.isShowUserUpdate = false;
+        this.isShowIndex = false;
       }
     },
     afterSet: function(echarts) {
@@ -241,7 +205,8 @@ export default {
     }
   },
   components: {
-    adminUser
+    adminUser,
+    bdataui
   }
 };
 </script>
@@ -357,6 +322,11 @@ body {
 .menu-index:hover {
   cursor: pointer;
   color: #b8c7ce;
+}
+.dropdown-menu{
+  padding: 0rem;
+  font-size: 14px;
+  line-height: 30px;
 }
 </style>
 
