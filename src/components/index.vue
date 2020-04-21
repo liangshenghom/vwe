@@ -16,24 +16,30 @@
     <!-- 卡片 -->
     <div class="container">
       <div class="row row-cols-1 row-cols-md-4 text-center">
-        <div class="col mb-4" v-for="(item,i) in card_list" :key="i">
+        
+        <div class="col mb-4" v-for="(item,i) in card_list" :key="item.id">
+         <transition appear mode="out-in" tag="div">
           <div class="card h-100">
             <img src="../../static/img/yuan.jpg" class="card-img-top w-50 m-auto" alt="..." />
             <div class="card-body">
-              <h5 class="card-title">标题{{item}}</h5>
-              <p class="card-text">标题{{item}}描述内容</p>
+              <h5 class="card-title">标题{{item.title}}</h5>
+              <p class="card-text">{{item.content}}描述内容</p>
             </div>
           </div>
+            </transition>
+          
         </div>
+       
       </div>
     </div>
 
     <!-- 内容 -->
     <div class="container">
+    <transition-group appear mode="out-in">
       <div
         class="row mt-5 mb-5 pb-5 pt-5 border-bottom"
         v-for="(article,key) in articles"
-        :key="key"
+        :key="article.id"
       >
         <div :class="[{'col-md-7':key%2!=1},{'col-md-5':key%2!=0}]">
           <h1 v-if="key%2!=1">{{article.title}}</h1>
@@ -47,6 +53,7 @@
           <img v-if="key%2!=1" src="../../static/img/1.jpg" class="w-100 h-auto" />
         </div>
       </div>
+    </transition-group>
     </div>
 
     <!-- 公共页脚 -->
@@ -151,7 +158,27 @@ export default {
       },
       isshow: false,
       id: "",
-      card_list: [1, 2, 3, 4]
+      card_list: [{
+        id:1,
+        title:"标题1",
+        content:"标题内容"
+      },
+      {
+        id:2,
+        title:"标题1",
+        content:"标题内容"
+      },
+      {
+        id:3,
+        title:"标题1",
+        content:"标题内容"
+      },
+      {
+        id:4,
+        title:"标题1",
+        content:"标题内容"
+      },
+      ]
     };
   },
   components: {
@@ -226,5 +253,15 @@ $border-none: 0px solid #cccccc !important;
   bottom: 100px;
   right: 40px;
   z-index: 1030;
+}
+
+.v-enter,
+.v-leave-to {
+  opacity: 0;
+  transform: translateX(150px);
+}
+.v-enter-active,
+.v-leave-active {
+  transition: 1.5s ease all;
 }
 </style>

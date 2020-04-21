@@ -12,6 +12,7 @@ import 'vx-easyui/dist/themes/vue.css';
 import EasyUI from 'vx-easyui';
 
 
+
 import VueSocketIO from 'vue-socket.io';
 
 import VueI18n from 'vue-i18n';

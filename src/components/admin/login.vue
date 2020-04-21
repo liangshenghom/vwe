@@ -1,67 +1,84 @@
 <template>
-  <div class="login">
-    
-    <div class="container pt-5">
-      <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-          <h1 class="text-center p-5 bg-info text-white mb-0">你好，请登录！</h1>
-          <div class="shadow p-5">
-            <form @submit.prevent="validateBeforeSubmit">
-              <div class="form-group">
-                <label for="InputUsername">用户名：</label>
-                <input
-                  type="text"
-                  class="form-control d-inline"
-                  id="username"
-                  aria-describedby="usernameHelp"
-                  placeholder="用户名"
-                  v-validate="'required'"
-                  v-model="username"
-                  name="username"
-                />
-
-                <small
-                  id="usernameHelp"
-                  class="form-text text-muted"
-                  v-show="errors.has('username')"
-                >{{ errors.first('username') }}</small>
-              </div>
-              <div class="form-group">
-                <label for="InputPassword1">密码：</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="password"
-                  name="password"
-                  v-validate="'required'"
-                  v-model="password"
-                  placeholder="密码"
-                />
-                <small
-                  id="passwordHelp"
-                  class="form-text text-muted text-danger"
-                  v-show="errors.has('password')"
-                >{{ errors.first('password') }}</small>
-              </div>
-              <div class="loginresult form-group form-check"></div>
-              <div class="text-center">
-                <button type="submit" class="btn btn-primary pl-5 pr-5">登 录</button>
-              </div>
-            </form>
+  <div class="login loginbg1">
+    <div class="loginform shadow p-5 text-white animated bounceInRight heartBeat delay-0.5s">
+      <form @submit.prevent="validateBeforeSubmit">
+        <div class="d-flex mb-3">
+          <div style="flex:1;text-align:right;font-size:16px;">
+            <label for="InputUsername">用户名：</label>
+          </div>
+          <div style="flex:4;">
+            <input
+              class="pl-2 pr-2"
+              type="text"
+              id="username"
+              aria-describedby="usernameHelp"
+              v-validate="'required'"
+              v-model="username"
+              name="username"
+              style="border-style:none none solid none;
+                  border-color:#FFFFFF;
+                  border-width:1px;
+                  background-color:transparent;
+                  width:70%;
+                  color:white;
+                  outline:none;
+              background:transparent;
+               -webkit-text-fill-color: #fff !important;
+               transition: background-color 5000s ease-in-out 0s;
+                  "
+            />
+          </div>
+          <div style="flex:1;">
+            <small
+              id="usernameHelp"
+              class="form-text text-warning"
+              v-show="errors.has('username')"
+            >{{ errors.first('username') }}</small>
           </div>
         </div>
-        <div class="col-md-3"></div>
-      </div>
+        <div class="d-flex">
+          <div style="flex:1;text-align:right;font-size:16px;">
+            <label>密码：</label>
+          </div>
+          <div style="flex:4;">
+            <input
+              class="pl-2 pr-2"
+              type="password"
+              id="password"
+              name="password"
+              v-validate="'required'"
+              v-model="password"
+              style="border-style:none none solid none;
+                    -webkit-text-fill-color: #fff !important;
+                    transition: background-color 5000s ease-in-out 0s;
+                  border-color:#FFFFFF;
+                  border-width:1px;
+                  background-color:transparent;
+                 
+                  width:70%;
+                  color:white;  outline:none;"
+            />
+          </div>
+          <div style="flex:1;">
+            <small
+              id="passwordHelp"
+              class="form-text text-warning"
+              v-show="errors.has('password')"
+            >{{ errors.first('password') }}</small>
+          </div>
+        </div>
+        <div class="loginresult form-group form-check"></div>
+
+        <button type="submit" class="btn text-white pl-4 pr-4 mt-2 border">登 录</button>
+      </form>
     </div>
-  
   </div>
 </template>
 
 <script>
+import animate from "animate.css";
 import axios from "axios";
-
-
+import "../../assert/sass/common.scss";
 
 export default {
   data() {
@@ -111,6 +128,40 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.loginform {
+  position: fixed;
+  right: 110px;
+  background: linear-gradient(
+    to right,
+    #bb313e25,
+    #bb313e25,
+    #d7222925,
+    #dd4a1625,
+    #e4761525,
+    #f5c50025,
+    #f0e92725,
+    #b1ce2425,
+    #48a93525,
+    #03944525,
+    #157c4f25,
+    #176a5825,
+    #1b556325,
+    #1d386f25,
+    #1d386f25,
+    #20277825,
+    #52266325,
+    #8a244b25
+  );
 
+  top: 40%;
+  width: 500px;
+}
+.login {
+  min-width: 1700px;
+}
+#username:focus {
+  outline: none none solid none;
+  background-color: transparent;
+}
 </style>
